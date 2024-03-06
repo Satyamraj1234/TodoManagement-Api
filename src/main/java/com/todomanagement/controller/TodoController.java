@@ -2,6 +2,7 @@ package com.todomanagement.controller;
 
 import com.todomanagement.Dto.TodoDto;
 import com.todomanagement.service.TodoService;
+import org.hibernate.boot.model.internal.CreateKeySecondPass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
+
+import java.util.List;
 
 @RequestMapping("/api/todo")
 @RestController
@@ -32,5 +35,9 @@ public class TodoController {
         TodoDto tododto = todoservice.getTodo(id);
         return new ResponseEntity<>(tododto, HttpStatus.OK);
     }
-
+    @GetMapping
+    public ResponseEntity<List<TodoDto>> getAllTodos(){
+       List<TodoDto> todos =  todoservice.getAllTodos();
+       return  new ResponseEntity<>(todos ,HttpStatus.OK);
+    }
 }
